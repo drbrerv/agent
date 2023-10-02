@@ -10,6 +10,7 @@ RUN apt-get update \
     && apt-get -y upgrade \
     && cd /setup \
     && make clean \
+    && make \
     && make install \
     && cd / \
     && rm -rf /setup

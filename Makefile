@@ -1,4 +1,4 @@
-all: agent.go module
+all: module
 	go build .
 
 clean:

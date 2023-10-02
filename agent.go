@@ -8,6 +8,7 @@ import (
 )
 
 const Proc = "/proc/"
+const Defaultlisten = "127.0.0.1:9091"
 
 type ProcData struct {
     io_wait float64
@@ -29,6 +30,17 @@ func getProc() string {
     }
 
     return Proc
+}
+
+func getListen() string {
+    p := os.Getenv("PROMETHEUS_AGENT_LISTEN")
+
+    if len(p) > 0 {
+        return p
+    }
+
+    return Defaultlisten
+
 }
 
 func gatherProcData() (*ProcData, error) {
@@ -74,6 +86,6 @@ func main() {
         })
     })
 
-    r.Run("127.0.0.1:9091")
+    r.Run(getListen())
 
 }

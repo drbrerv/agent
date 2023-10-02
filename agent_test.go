@@ -38,3 +38,21 @@ func TestgetProc(t *testing.T) {
     }
 
 }
+
+func TestgetListen(t *testing.T) {
+    got1 := getListen()
+
+    if got1 != Defaultlisten {
+        t.Errorf("getListen() = %s; want %s", got1, Defaultlisten)
+    }
+
+    m := ":9091"
+    os.Setenv("PROMETHEUS_AGENT_PROC", m)
+
+    got2 := getProc()
+    if got2 != m {
+        t.Errorf("getProc() = %s; want %s", got2, m)
+    }
+
+
+}
