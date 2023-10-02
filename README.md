@@ -1,6 +1,7 @@
 # Gin-based REST Prometheus-Scrapable System Metrics Service
 
-This project provides a RESTful service that returns system status data.  The items returned are:
+This project provides a RESTful service that returns system status data.  The
+items returned are:
 
     - Kernel IO Wait Percentage
     - Kernel Free Memory
@@ -8,7 +9,7 @@ This project provides a RESTful service that returns system status data.  The it
 
 The service exposes a single endpoint that returns this data:
 
-    `/metrics`
+    /metrics
 
 ## Building
 
@@ -17,11 +18,18 @@ executable or a Docker image.
 
     - Building the executable:
 
-        `make`
+        make
 
     - Building a Docker image:
 
-        `docker build -t prometheus/metrics_agent:latest .`
+        docker build -t prometheus/metrics_agent:latest .
+
+## Testing
+
+The unit tests for this project can be run with the following command in the
+top-level directory:
+
+    go test
 
 ## Running
 
@@ -30,23 +38,23 @@ executable or a Docker image.
     The service can be run as a standalone application after a successful
     build of the executable with the following command:
 
-        `agent`
+        agent
 
     On the local system, the service can then be accessed with the following
     curl command:
 
-        `curl http://127.0.0.1:9091/metrics`
+        curl http://127.0.0.1:9091/metrics
 
 - Containerized application:
 
     The service can be run as a containerized application after a successful
     Docker image build with the following command:
 
-        `
             docker run -d \
                 --rm \
-                --name metrics
-                -p 9091:localhost:9091
+                --name metrics \
+                -e "PROMETHEUS_AGENT_PROC=/mnt/host/proc" \
+                -e "PROMETHEUS_AGENT_LISTEN=:9091" \
+                -p 127.0.0.1:9091:9091 \
+                -v /proc:/mnt/host/proc:ro \
                 prometheus/metrics_agent:latest
-        `
-
