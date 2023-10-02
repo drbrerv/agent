@@ -1,4 +1,4 @@
-# Gin-based REST Prometheus-Scrapable System Metrics Service
+# Gin-based RESTful, Prometheus-Scrapable System Metrics Service
 
 This project provides a RESTful service that returns system status data.  The
 items returned are:
