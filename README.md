@@ -58,3 +58,10 @@ top-level directory:
                 -p 127.0.0.1:9091:9091 \
                 -v /proc:/mnt/host/proc:ro \
                 prometheus/metrics_agent:latest
+
+    As was the case for the standalone application, the containerized instance
+    of the service can be accessed with the following curl command from the
+    host system:
+
+        curl http://127.0.0.1:9091/metrics
+
